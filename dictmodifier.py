@@ -126,9 +126,9 @@ def parse_headers(headers):
     list of lists
     
     Example:
-    >>> parse_headers(["key_1.key_1.2","key_2.items[0].key2.2","key_3"])
+    >>> parse_headers(["firstKey.secondKey.thirdKey","firstKey.nestedList[0].secondKey","otherKey"])
     
-    [['key_1', 'key_1', '2'], ['key_2', ('items', 0), 'key2', '2'], ['key_3']]
+    [['firstKey', 'secondKey', 'thirdKey'], ['firstKey', ('nestedList', 0), 'secondKey'], ['otherKey']]
     '''
     headers = [h.split('.') for h in headers]
     for fieldnames in headers:
