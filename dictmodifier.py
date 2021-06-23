@@ -253,6 +253,8 @@ def flatten_dict(dict_obj):
 
 def create_new_dict(dict_obj, prefix = None):
     prefix = prefix or ""
+    if not isinstance(dict_obj, dict):
+        return {prefix:dict_obj}
     return {prefix + "." + key:value for key, value in dict_obj.items()}
 
 
@@ -273,7 +275,7 @@ def apply_func(dict_obj, keys, func, **kwargs):
     elif isinstance(keys[0], tuple):
         key, idx = keys[0][0], keys[0][1]
         if idx == "i":
-            for item in dict_obj[key]:
+            for item in dict_obj.get(key,[]):
                 apply_func(item, keys[1:], func, **kwargs)
         elif not isinstance(dict_obj[key], list) or idx > len(dict_obj[key])-1:
             return
